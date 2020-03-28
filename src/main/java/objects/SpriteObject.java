@@ -1,6 +1,7 @@
 package objects;
 
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
@@ -8,6 +9,7 @@ import javafx.geometry.Rectangle2D;
 public class SpriteObject
 {
     private Image image;
+    private ImageView imageView;
     private Point2D position;
     private Point2D velocity;
     private double width;
@@ -23,7 +25,7 @@ public class SpriteObject
         velocity = new Point2D(0, 0);
     }
 
-    public SpriteObject(Point2D p) {
+    public SpriteObject(final Point2D p) {
         position = new Point2D(p.getX(), p.getY());
         velocity = new Point2D(0, 0);
     }
@@ -32,6 +34,9 @@ public class SpriteObject
         image = i;
         width = i.getWidth();
         height = i.getHeight();
+        imageView = new ImageView(image);
+        imageView.setX(position.getX());
+        imageView.setY(position.getY());
     }
 
     public void setImage(String filename) {
@@ -43,7 +48,7 @@ public class SpriteObject
         position = new Point2D(x, y);
     }
 
-    public void setPosition(Point2D p) {
+    public void setPosition(final Point2D p) {
         setPosition(p.getX(), p.getY());
     }
 
@@ -51,7 +56,7 @@ public class SpriteObject
         velocity = new Point2D(x, y);
     }
 
-    public void setVelocity(Point2D p) {
+    public void setVelocity(final Point2D p) {
         setVelocity(p.getX(), p.getY());
     }
 
@@ -67,15 +72,21 @@ public class SpriteObject
         return new Rectangle2D(position.getX(), position.getY(), width, height);
     }
 
+    public ImageView getImageView() {
+        return imageView;
+    }
+
     public void update(double time) {
         position = position.add(velocity.getX() * time, velocity.getY() * time);
+        imageView.setX(position.getX());
+        imageView.setY(position.getY());
     }
 
     public void render(GraphicsContext gc) {
         gc.drawImage(image, position.getX(), position.getY());
     }
 
-    public boolean intersects(SpriteObject s) {
+    public boolean intersects(final SpriteObject s) {
         return s.getBoundary().intersects(this.getBoundary());
     }
 
