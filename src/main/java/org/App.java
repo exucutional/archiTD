@@ -1,25 +1,45 @@
 package org;
 
+import java.io.IOException;
+
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
+import controllers.MainController;
 
-/**
- * JavaFX App
- */
 public class App extends Application {
 
-    @Override
-    public void start(Stage stage) {
-        var javaVersion = SystemInfo.javaVersion();
-        var javafxVersion = SystemInfo.javafxVersion();
+    private String title = "archiTD";
+    private AnimationTimer mainLoop;
+    private FXMLLoader mainLoader = new FXMLLoader(); 
+    private MainController mainController;
+    private Parent root;
 
-        var label = new Label("Hello, JavaFX " + javafxVersion + ", running on Java " + javaVersion + ".");
-        var scene = new Scene(new StackPane(label), 640, 480);
-        stage.setScene(scene);
+    @Override
+    public void init() throws Exception {
+        super.init();
+        mainLoader.setLocation(getClass().getResource("/fxml/MainScene.fxml"));
+        root = mainLoader.load();
+        mainController = mainLoader.getController();
+        mainLoop = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                mainController.tick();
+            }
+        };
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+        stage.setTitle(title);
+        stage.setScene(new Scene(root));
+
+        mainLoop.start();
+
         stage.show();
     }
 
