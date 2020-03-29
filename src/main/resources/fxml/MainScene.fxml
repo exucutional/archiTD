@@ -1,25 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?language javascript?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.canvas.Canvas?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.shape.Circle?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
-   <bottom>
-      <Button fx:id="down" mnemonicParsing="false" onAction="#click" text="Button" BorderPane.alignment="CENTER" />
-   </bottom>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
    <center>
-      <Circle fx:id="circle" fill="DODGERBLUE" radius="10.0" stroke="BLACK" strokeType="INSIDE" BorderPane.alignment="CENTER" />
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <Canvas height="720.0" layoutY="129.0" width="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+         </children>
+      </AnchorPane>
    </center>
-   <left>
-      <Button fx:id="left" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-   </left>
-   <right>
-      <Button fx:id="right" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-   </right>
-   <top>
-      <Button fx:id="up" mnemonicParsing="false" text="Button" BorderPane.alignment="CENTER" />
-   </top>
+   <bottom>
+      <fx:include fx:id="structureList" source="StructureList.fxml" BorderPane.alignment="CENTER" />
+   </bottom>
 </BorderPane>

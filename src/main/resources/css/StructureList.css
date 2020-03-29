@@ -1,0 +1,10 @@
+#structureList {
+    -fx-background-color: lightslategray;
+    -fx-opacity: 1;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(three-pass-box, lightslategray, 5, 0, 0, 0);
+}
+
+.structureItem {
+    -fx-background-color: aliceblue;
+}
