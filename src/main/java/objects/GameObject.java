@@ -1,6 +1,6 @@
 package objects;
 
-abstract class GameObject {
+abstract class GameObject extends SpriteObject {
     private Boolean isActive = true;
     private Boolean isStatic = false;
     private String tag;
