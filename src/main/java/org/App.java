@@ -8,14 +8,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import managers.ControlManager;
 import controllers.MainController;
 
 public class App extends Application {
 
     private String title = "archiTD";
     private AnimationTimer mainLoop;
-    private FXMLLoader mainLoader = new FXMLLoader(); 
+    private FXMLLoader mainLoader = new FXMLLoader();
+    private ControlManager controlManager = new ControlManager();
     private MainController mainController;
     private Parent root;
 
@@ -25,6 +26,7 @@ public class App extends Application {
         mainLoader.setLocation(getClass().getResource("/fxml/MainScene.fxml"));
         root = mainLoader.load();
         mainController = mainLoader.getController();
+        mainController.init(controlManager);
         mainLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {

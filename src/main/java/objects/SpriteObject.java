@@ -52,6 +52,10 @@ public class SpriteObject
         setPosition(p.getX(), p.getY());
     }
 
+    public void setCenter(double x, double y) {
+        setPosition(x - width / 2, y - height / 2);
+    }
+
     public void setVelocity(double x, double y) {
         velocity = new Point2D(x, y);
     }
