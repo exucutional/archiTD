@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import managers.AssetManager;
 import managers.ControlManager;
 import controllers.MainController;
 
@@ -17,6 +18,7 @@ public class App extends Application {
     private AnimationTimer mainLoop;
     private FXMLLoader mainLoader = new FXMLLoader();
     private ControlManager controlManager = new ControlManager();
+    private AssetManager assetManager = new AssetManager();
     private MainController mainController;
     private Parent root;
 
@@ -25,8 +27,9 @@ public class App extends Application {
         super.init();
         mainLoader.setLocation(getClass().getResource("/fxml/MainScene.fxml"));
         root = mainLoader.load();
+        assetManager.init();
         mainController = mainLoader.getController();
-        mainController.init(controlManager);
+        mainController.init(controlManager, assetManager);
         mainLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {

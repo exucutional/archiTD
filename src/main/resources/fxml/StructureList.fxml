@@ -4,7 +4,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.HBox?>
 
-
 <HBox fx:id="structureList" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" stylesheets="@../css/StructureList.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StructureListController">
    <children>
       <Button fx:id="HubButton" mnemonicParsing="false" onAction="#HubButtonClicked" prefHeight="80.0" prefWidth="80.0" styleClass="structureItem" text="Hub">
@@ -12,7 +11,7 @@
             <Insets />
          </HBox.margin>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" styleClass="structureItem" text="Structure 1">
+      <Button fx:id="TurretButton" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" styleClass="structureItem" text="Turret">
          <HBox.margin>
             <Insets />
          </HBox.margin>

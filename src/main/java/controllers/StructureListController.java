@@ -10,21 +10,22 @@ public class StructureListController {
 
     private MainController mainController;
 
-    @FXML
-    private Button HubButton;
-    @FXML
-    private Button Structure1Button;
+    @FXML private Button HubButton;
+    @FXML private Button TurretButton;
 
     public void init(MainController controller) {
         mainController = controller;
     }
 
-    @FXML
-    public void HubButtonClicked(ActionEvent event) {
+    @FXML public void HubButtonClicked(ActionEvent event) {
         Structure structure = new Structure();
-        structure.setImage("/assets/structures/hub.png");
+        structure.setImage(mainController.assetManager.getImage("structure-hub"));
         ImageView imageView = structure.getImageView();
         mainController.mainPane.getChildren().add(imageView);
         mainController.controlManager.placeStructure(structure);
+    }
+
+    @FXML public void TurretButtonClicked(ActionEvent event) {
+        ;
     }
 }
