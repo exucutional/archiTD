@@ -34,6 +34,7 @@ public class ControlManager {
         pane.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && controlMode == ControlMode.LAYING) {
                 controlMode = ControlMode.DEFAULT;
+                controlStructure.setActive(true);
             }
         });
     }

@@ -6,8 +6,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 
-public class SpriteObject
-{
+public class SpriteObject {
+
     private Image image;
     private ImageView imageView;
     private Point2D position = new Point2D(0, 0);
@@ -36,10 +36,10 @@ public class SpriteObject
         image = i;
         width = i.getWidth();
         height = i.getHeight();
-        center = new Point2D(width / 2, height / 2);
         imageView = new ImageView(image);
         imageView.setX(position.getX());
         imageView.setY(position.getY());
+        setLocalCenter(width / 2, height / 2);
     }
 
     public void setImage(String filename) {
@@ -57,12 +57,12 @@ public class SpriteObject
         setPosition(p.getX(), p.getY());
     }
 
-    public void setCenter(double x, double y) {
+    public void setLocalCenter(double x, double y) {
         center = new Point2D(x, y);
     }
 
-    public void setCenter(final Point2D p) {
-        setCenter(p.getX(), p.getY());
+    public void setLocalCenter(final Point2D p) {
+        setLocalCenter(p.getX(), p.getY());
     }
 
     public void setVelocity(double x, double y) {
@@ -93,8 +93,12 @@ public class SpriteObject
         return imageView;
     }
 
-    public void update(double time) {
-        position = position.add(velocity.getX() * time, velocity.getY() * time);
+    public Point2D getGlobalCenter() {
+        return new Point2D(position.getX() + center.getX(), position.getY() + center.getY());
+    }
+
+    public void update(double dt) { 
+        position = position.add(velocity.getX() * dt, velocity.getY() * dt);
         imageView.setX(position.getX());
         imageView.setY(position.getY());
     }

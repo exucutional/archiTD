@@ -28,9 +28,11 @@ public class StructureListController {
         Structure tower = new Structure(mainController.assetManager.getImage("structure-tower-simple"));
         Turret turret = new Turret(tower);
         turret.setImage(mainController.assetManager.getImage("structure-turret-simple"));
-        turret.setCenter(17, 17);
+        turret.setLocalCenter(16, 16);
+        turret.setActive(false);
         mainController.mainPane.getChildren().add(tower.getImageView());
         mainController.mainPane.getChildren().add(turret.getImageView());
         mainController.controlManager.placeStructure(turret);
+        mainController.objectManager.addStructure(turret);
     }
 }

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import managers.AssetManager;
 import managers.ControlManager;
+import managers.ObjectManager;
 import controllers.MainController;
 
 public class App extends Application {
@@ -19,8 +20,10 @@ public class App extends Application {
     private FXMLLoader mainLoader = new FXMLLoader();
     private ControlManager controlManager = new ControlManager();
     private AssetManager assetManager = new AssetManager();
+    private ObjectManager objectManager = new ObjectManager();
     private MainController mainController;
     private Parent root;
+    private long prevNanos = 0;
 
     @Override
     public void init() throws Exception {
@@ -29,11 +32,19 @@ public class App extends Application {
         root = mainLoader.load();
         assetManager.init();
         mainController = mainLoader.getController();
-        mainController.init(controlManager, assetManager);
+        mainController.init(controlManager, assetManager, objectManager);
+
         mainLoop = new AnimationTimer() {
             @Override
             public void handle(long now) {
-                mainController.tick();
+                if (prevNanos == 0) {
+                    prevNanos = now;
+                    return;
+                }
+                long deltaNanos = now - prevNanos;
+			    prevNanos = now;
+			    double dt = deltaNanos / 1.0e9;
+                objectManager.update(dt);
             }
         };
     }
