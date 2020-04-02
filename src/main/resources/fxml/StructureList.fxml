@@ -6,12 +6,12 @@
 
 <HBox fx:id="structureList" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="10.0" stylesheets="@../css/StructureList.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.StructureListController">
    <children>
-      <Button fx:id="HubButton" mnemonicParsing="false" onAction="#HubButtonClicked" prefHeight="80.0" prefWidth="80.0" styleClass="structureItem" text="Hub">
+      <Button fx:id="HubButton" mnemonicParsing="false" onAction="#hubButtonClicked" prefHeight="80.0" prefWidth="80.0" styleClass="structureItem" text="Hub">
          <HBox.margin>
             <Insets />
          </HBox.margin>
       </Button>
-      <Button fx:id="TurretButton" mnemonicParsing="false" prefHeight="80.0" prefWidth="80.0" styleClass="structureItem" text="Turret">
+      <Button fx:id="TurretButton" mnemonicParsing="false" onAction="#turretButtonClicked" prefHeight="80.0" prefWidth="80.0" styleClass="structureItem" text="Turret">
          <HBox.margin>
             <Insets />
          </HBox.margin>

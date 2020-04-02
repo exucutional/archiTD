@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import objects.Structure;
+import objects.Turret;
 
 public class StructureListController {
 
@@ -17,15 +18,19 @@ public class StructureListController {
         mainController = controller;
     }
 
-    @FXML public void HubButtonClicked(ActionEvent event) {
-        Structure structure = new Structure();
-        structure.setImage(mainController.assetManager.getImage("structure-hub"));
-        ImageView imageView = structure.getImageView();
-        mainController.mainPane.getChildren().add(imageView);
+    @FXML public void hubButtonClicked(ActionEvent event) {
+        Structure structure = new Structure(mainController.assetManager.getImage("structure-hub"));
+        mainController.mainPane.getChildren().add(structure.getImageView());
         mainController.controlManager.placeStructure(structure);
     }
 
-    @FXML public void TurretButtonClicked(ActionEvent event) {
-        ;
+    @FXML public void turretButtonClicked(ActionEvent event) {
+        Structure tower = new Structure(mainController.assetManager.getImage("structure-tower-simple"));
+        Turret turret = new Turret(tower);
+        turret.setImage(mainController.assetManager.getImage("structure-turret-simple"));
+        turret.setCenter(17, 17);
+        mainController.mainPane.getChildren().add(tower.getImageView());
+        mainController.mainPane.getChildren().add(turret.getImageView());
+        mainController.controlManager.placeStructure(turret);
     }
 }

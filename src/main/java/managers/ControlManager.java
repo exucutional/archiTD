@@ -1,5 +1,6 @@
 package managers;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
@@ -12,6 +13,8 @@ enum ControlMode {
 
 public class ControlManager {
 
+    public double mouseX = 0;
+    public double mouseY = 0;
     private ControlMode controlMode;
     private Structure controlStructure;
 
@@ -22,9 +25,11 @@ public class ControlManager {
     public void initMainPane(AnchorPane pane) {
         pane.setOnMouseMoved(event -> {
             if (controlMode == ControlMode.LAYING) {
-                controlStructure.setCenter(event.getX(), event.getY());
-                controlStructure.update(0);
+                Point2D center = controlStructure.getCenter();
+                controlStructure.setPosition(event.getX() - center.getX(), event.getY() - center.getY());
             }
+            mouseX = event.getX();
+            mouseY = event.getY();
         });
         pane.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && controlMode == ControlMode.LAYING) {

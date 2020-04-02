@@ -10,30 +10,33 @@ public class SpriteObject
 {
     private Image image;
     private ImageView imageView;
-    private Point2D position;
-    private Point2D velocity;
+    private Point2D position = new Point2D(0, 0);
+    private Point2D center = new Point2D(0, 0);
+    private Point2D velocity = new Point2D(0, 0);
     private double width;
     private double height;
 
     public SpriteObject() {
-        position = new Point2D(0, 0);
-        velocity = new Point2D(0, 0);
+        ;
     }
 
     public SpriteObject(double x, double y) {
         position = new Point2D(x, y);
-        velocity = new Point2D(0, 0);
     }
 
     public SpriteObject(final Point2D p) {
         position = new Point2D(p.getX(), p.getY());
-        velocity = new Point2D(0, 0);
+    }
+
+    public SpriteObject(Image image) {
+        setImage(image);
     }
 
     public void setImage(Image i) {
         image = i;
         width = i.getWidth();
         height = i.getHeight();
+        center = new Point2D(width / 2, height / 2);
         imageView = new ImageView(image);
         imageView.setX(position.getX());
         imageView.setY(position.getY());
@@ -46,6 +49,8 @@ public class SpriteObject
 
     public void setPosition(double x, double y) {
         position = new Point2D(x, y);
+        imageView.setX(position.getX());
+        imageView.setY(position.getY());
     }
 
     public void setPosition(final Point2D p) {
@@ -53,7 +58,11 @@ public class SpriteObject
     }
 
     public void setCenter(double x, double y) {
-        setPosition(x - width / 2, y - height / 2);
+        center = new Point2D(x, y);
+    }
+
+    public void setCenter(final Point2D p) {
+        setCenter(p.getX(), p.getY());
     }
 
     public void setVelocity(double x, double y) {
@@ -66,6 +75,10 @@ public class SpriteObject
 
     public Point2D getPosition() {
         return new Point2D(position.getX(), position.getY());
+    }
+
+    public Point2D getCenter() {
+        return new Point2D(center.getX(), center.getY());
     }
 
     public Point2D getVelocity() {

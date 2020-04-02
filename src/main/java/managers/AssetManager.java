@@ -12,7 +12,7 @@ public class AssetManager {
     public void init() {
         images.put("structure-hub", new Image("/assets/structures/hub.png"));
         images.put("structure-tower-simple", new Image("/assets/structures/tower-simple.png"));
-        images.put("structure-turret-simple", new Image("/assets/structures/tower-simple.png"));
+        images.put("structure-turret-simple", new Image("/assets/structures/turret-simple.png"));
     }
 
     public Image putImage(String key, Image image) {
