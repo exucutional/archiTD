@@ -5,6 +5,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import objects.Structure;
+import utility.Vector2D;
 
 enum ControlMode {
     DEFAULT,
@@ -25,7 +26,7 @@ public class ControlManager {
     public void initMainPane(AnchorPane pane) {
         pane.setOnMouseMoved(event -> {
             if (controlMode == ControlMode.LAYING) {
-                Point2D center = controlStructure.getCenter();
+                Vector2D center = controlStructure.getCenter();
                 controlStructure.setPosition(event.getX() - center.getX(), event.getY() - center.getY());
             }
             mouseX = event.getX();

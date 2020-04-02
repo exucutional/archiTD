@@ -1,8 +1,8 @@
 package objects;
 
-import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
+import utility.Vector2D;
 
 public class Turret extends Defence {
 
@@ -19,7 +19,7 @@ public class Turret extends Defence {
     }
 
     @Override
-    public void setPosition(Point2D p) {
+    public void setPosition(Vector2D p) {
         super.setPosition(p);
         tower.setPosition(p);
     }
