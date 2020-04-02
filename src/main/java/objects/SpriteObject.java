@@ -4,16 +4,13 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import utility.Vector2D;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.geometry.Point2D;
 import javafx.geometry.Rectangle2D;
 
-public class SpriteObject {
+public class SpriteObject extends Object {
 
     private Image image;
     private ImageView imageView;
-    private Vector2D position = new Vector2D(0, 0);
     private Vector2D center = new Vector2D(0, 0);
-    private Vector2D velocity = new Vector2D(0, 0);
     private double width;
     private double height;
 
@@ -22,11 +19,11 @@ public class SpriteObject {
     }
 
     public SpriteObject(double x, double y) {
-        position = new Vector2D(x, y);
+        super(x, y);
     }
 
     public SpriteObject(Vector2D v) {
-        position = new Vector2D(v);
+        super(v);
     }
 
     public SpriteObject(Image image) {
@@ -48,42 +45,28 @@ public class SpriteObject {
         setImage(i);
     }
 
+    @Override
     public void setPosition(double x, double y) {
-        position.setVector(x, y);
+        super.setPosition(x, y);
         imageView.setX(position.getX());
         imageView.setY(position.getY());
     }
 
+    @Override
     public void setPosition(Vector2D v) {
         setPosition(v.getX(), v.getY());
     }
 
     public void setLocalCenter(double x, double y) {
-        center = new Vector2D(x, y);
+        center.setVector(x, y);
     }
 
     public void setLocalCenter(Vector2D v) {
         setLocalCenter(v.getX(), v.getY());
     }
 
-    public void setVelocity(double x, double y) {
-        velocity.setVector(x, y);
-    }
-
-    public void setVelocity(Vector2D v) {
-        setVelocity(v.getX(), v.getY());
-    }
-
-    public Vector2D getPosition() {
-        return position;
-    }
-
     public Vector2D getCenter() {
         return center;
-    }
-
-    public Vector2D getVelocity() {
-        return velocity;
     }
 
     public Rectangle2D getBoundary() {
@@ -98,8 +81,9 @@ public class SpriteObject {
         return new Vector2D(position.getX() + center.getX(), position.getY() + center.getY());
     }
 
+    @Override
     public void update(double dt) {
-        position.add(velocity.getX() * dt, velocity.getY() * dt);
+        super.update(dt);
         imageView.setX(position.getX());
         imageView.setY(position.getY());
     }
@@ -110,11 +94,5 @@ public class SpriteObject {
 
     public boolean intersects(SpriteObject s) {
         return s.getBoundary().intersects(this.getBoundary());
-    }
-
-    public String toString()
-    {
-        return "Position: [" + position.getX() + "," + position.getY() + "]" 
-        + " Velocity: [" + velocity.getX() + "," + velocity.getY() + "]";
     }
 }

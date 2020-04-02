@@ -1,10 +1,10 @@
 package objects;
 
-import javafx.geometry.Point2D;
+import utility.Vector2D;
 
 public interface Target {
 
-    public Point2D getPosition();
-    public Point2D getGlobalCenter();
+    public Vector2D getPosition();
+    public Vector2D getGlobalCenter();
 
 }
