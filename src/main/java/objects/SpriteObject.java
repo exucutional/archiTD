@@ -26,30 +26,38 @@ public class SpriteObject extends Object {
         super(v);
     }
 
-    public SpriteObject(Image image) {
-        setImage(image);
+    public SpriteObject(Image image, boolean imageViewEnable) {
+        setImage(image, imageViewEnable);
     }
 
-    public void setImage(Image i) {
+    public void setImage(Image i, boolean imageViewEnable) {
         image = i;
         width = i.getWidth();
         height = i.getHeight();
-        imageView = new ImageView(image);
-        imageView.setX(position.getX());
-        imageView.setY(position.getY());
+        if (imageViewEnable) {
+            initImageView();
+        }
         setLocalCenter(width / 2, height / 2);
     }
 
-    public void setImage(String filename) {
+    public void initImageView() {
+        imageView = new ImageView(image);
+        imageView.setX(position.getX());
+        imageView.setY(position.getY());
+    }
+
+    public void setImage(String filename, boolean imageViewEnable) {
         Image i = new Image(filename);
-        setImage(i);
+        setImage(i, imageViewEnable);
     }
 
     @Override
     public void setPosition(double x, double y) {
         super.setPosition(x, y);
-        imageView.setX(position.getX());
-        imageView.setY(position.getY());
+        if (imageView != null) {
+            imageView.setX(position.getX());
+            imageView.setY(position.getY());
+        }
     }
 
     @Override
@@ -84,8 +92,10 @@ public class SpriteObject extends Object {
     @Override
     public void update(double dt) {
         super.update(dt);
-        imageView.setX(position.getX());
-        imageView.setY(position.getY());
+        if (imageView != null) {
+            imageView.setX(position.getX());
+            imageView.setY(position.getY());
+        }
     }
 
     public void render(GraphicsContext gc) {

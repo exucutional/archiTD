@@ -1,9 +1,11 @@
 package org;
 
 import java.io.IOException;
+import java.util.Iterator;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,7 +32,11 @@ public class App extends Application {
         super.init();
         mainLoader.setLocation(getClass().getResource("/fxml/MainScene.fxml"));
         root = mainLoader.load();
-        assetManager.init();
+        Platform.runLater(new Runnable() {
+            public void run() {
+                assetManager.init();
+            }
+        });
         mainController = mainLoader.getController();
         mainController.init(controlManager, assetManager, objectManager);
 
@@ -45,6 +51,7 @@ public class App extends Application {
 			    prevNanos = now;
 			    double dt = deltaNanos / 1.0e9;
                 objectManager.update(dt);
+                mainController.render();
             }
         };
     }

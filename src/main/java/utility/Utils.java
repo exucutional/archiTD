@@ -1,5 +1,7 @@
 package utility;
 
+import org.Settings;
+
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;
@@ -25,8 +27,8 @@ public class Utils {
         return wi;
     }
 
-    public static Image[] createGradientImages() {
-        int count = 256;
+    public static Image[] createGradientCircles() {
+        int count = (int) Settings.get().getParticleLifeSpanMax();
         double width = count;
         Stop[] stops = new Stop[] {
             new Stop(0, Color.BLACK.deriveColor(1, 1, 1, 0.0)),
@@ -42,13 +44,13 @@ public class Utils {
         double radius = 1;
         for (int i = 0; i < count; i++) {
             Color color = lookupImage.getPixelReader().getColor(i, 0);
-            Circle ball = new Circle(radius);
+            Circle circle = new Circle(radius);
             RadialGradient gradient = new RadialGradient(
                 0, 0, 0, 0,
                 radius, false, CycleMethod.NO_CYCLE,
                 new Stop(0, color.deriveColor(1, 1, 1, 1)), new Stop(1, color.deriveColor(1, 1, 1, 0)));
-            ball.setFill(gradient);
-            list[i] = Utils.createImage(ball);
+            circle.setFill(gradient);
+            list[i] = Utils.createImage(circle);
         }
         return list;
     }

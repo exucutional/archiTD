@@ -4,9 +4,9 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="mainPane" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+<AnchorPane fx:id="mainPane" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
    <children>
-      <Canvas height="720.0" layoutY="129.0" width="1280.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
-      <fx:include fx:id="structureList" source="StructureList.fxml" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="545.0" AnchorPane.rightAnchor="545.0" />
+      <Canvas fx:id="mainCanvas" height="720.0" width="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+      <fx:include fx:id="structureList" source="StructureList.fxml" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="500.0" AnchorPane.rightAnchor="500.0" />
    </children>
 </AnchorPane>

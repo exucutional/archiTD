@@ -1,7 +1,5 @@
 package managers;
 
-import javafx.geometry.Point2D;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import objects.Structure;

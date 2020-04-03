@@ -1,12 +1,17 @@
 package controllers;
 
+import java.util.Iterator;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.AnchorPane;
 import managers.AssetManager;
 import managers.ControlManager;
 import managers.ObjectManager;
+import objects.Entity;
 
 public class MainController {
 
@@ -14,6 +19,7 @@ public class MainController {
     public AssetManager assetManager;
     public ObjectManager objectManager;
     @FXML public AnchorPane mainPane;
+    @FXML public Canvas mainCanvas;
     @FXML public Node structureList;
     @FXML private StructureListController structureListController;
 
@@ -32,7 +38,13 @@ public class MainController {
         objectManager = omanager;
     }
 
-    public void tick() {
-        ;
+    public void render() {
+        GraphicsContext gc = mainCanvas.getGraphicsContext2D();
+        Iterator<Entity> iter = objectManager.getEntityIterator();
+        while (iter.hasNext()) {
+            Entity entity = iter.next();
+            entity.setImage(assetManager.getImage(String.format("entity-gas-%d", (int) Math.floor(entity.getLifespan()))), false);
+        }
+        objectManager.render(gc);
     }
 }
