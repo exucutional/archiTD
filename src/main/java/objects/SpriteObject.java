@@ -73,7 +73,7 @@ public class SpriteObject extends Object {
         setLocalCenter(v.getX(), v.getY());
     }
 
-    public Vector2D getCenter() {
+    public Vector2D getLocalCenter() {
         return center;
     }
 
@@ -87,6 +87,14 @@ public class SpriteObject extends Object {
 
     public Vector2D getGlobalCenter() {
         return new Vector2D(position.getX() + center.getX(), position.getY() + center.getY());
+    }
+
+    public double getWidth() {
+        return width;
+    }
+
+    public double getHeight() {
+        return height;
     }
 
     @Override

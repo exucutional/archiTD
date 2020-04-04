@@ -14,9 +14,9 @@ public class Settings {
         return settings;
     }
 
-    private DoubleProperty particleWidth = new SimpleDoubleProperty(5);
+    private DoubleProperty particleWidth = new SimpleDoubleProperty(20);
     private DoubleProperty particleHeight = new SimpleDoubleProperty(particleWidth.doubleValue());
-    private DoubleProperty particleLifeSpanMax = new SimpleDoubleProperty(256);
+    private DoubleProperty particleLifeSpanMax = new SimpleDoubleProperty(512);
     private DoubleProperty particleMaxSpeed = new SimpleDoubleProperty(4);
 
     public final double getParticleWidth() {

@@ -8,7 +8,6 @@ import managers.ObjectManager;
 
 public class Spreader extends Structure {
 
-    private double frequency = 0;
     private double period = 0;
     private double dtAcc = 0;
     private Random random = new Random();
@@ -16,17 +15,19 @@ public class Spreader extends Structure {
 
     public Spreader(ObjectManager objectManager, double frequency) {
         this.objectManager = objectManager;
-        this.frequency = frequency;
         period = 1 / frequency;
     }
 
     private Entity createParticle() {
         // double vX = 100 * (random.nextGaussian() * 0.3);
         // double vY = 100 * (random.nextGaussian() * 0.3 - 1.0);
-        double vX = 100 * (random.nextDouble() - 0.5);
-        double vY = 100 * (random.nextDouble() - 0.5);
+        double vX = 200 * (random.nextDouble() - 0.5);
+        double vY = 200 * (random.nextDouble() - 0.5);
         Entity entity = new Entity(Settings.get().getParticleLifeSpanMax());
-        entity.setPosition(getPosition());
+        double halfWidth = Settings.get().getParticleWidth() / 2;
+        entity.setPosition(
+            getPosition().getX() - halfWidth,
+            getPosition().getY() - halfWidth);
         entity.setVelocity(vX, vY);
         entity.setAcceleration(0, 0);
         return entity;

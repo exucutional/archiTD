@@ -1,7 +1,6 @@
 package org;
 
 import java.io.IOException;
-import java.util.Iterator;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;

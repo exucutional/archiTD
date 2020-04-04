@@ -41,7 +41,7 @@ public class Utils {
         rectangle.setFill(linearGradient);
         Image lookupImage = createImage(rectangle);
         Image[] list = new Image[count];
-        double radius = 1;
+        double radius = Settings.get().getParticleWidth();
         for (int i = 0; i < count; i++) {
             Color color = lookupImage.getPixelReader().getColor(i, 0);
             Circle circle = new Circle(radius);

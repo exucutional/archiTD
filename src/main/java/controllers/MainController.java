@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import managers.AssetManager;
 import managers.ControlManager;
 import managers.ObjectManager;
@@ -41,6 +42,8 @@ public class MainController {
     public void render() {
         GraphicsContext gc = mainCanvas.getGraphicsContext2D();
         Iterator<Entity> iter = objectManager.getEntityIterator();
+        gc.setFill(Color.WHITE);
+        gc.fillRect(0, 0, mainCanvas.getWidth(), mainCanvas.getHeight());
         while (iter.hasNext()) {
             Entity entity = iter.next();
             entity.setImage(assetManager.getImage(String.format("entity-gas-%d", (int) Math.floor(entity.getLifespan()))), false);

@@ -24,7 +24,7 @@ public class ControlManager {
     public void initMainPane(AnchorPane pane) {
         pane.setOnMouseMoved(event -> {
             if (controlMode == ControlMode.LAYING) {
-                Vector2D center = controlStructure.getCenter();
+                Vector2D center = controlStructure.getLocalCenter();
                 controlStructure.setPosition(event.getX() - center.getX(), event.getY() - center.getY());
             }
             mouseX = event.getX();
