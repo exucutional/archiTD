@@ -43,8 +43,8 @@ public class Spreader extends Structure {
 
     @Override
     public void update(double dt) {
-        super.update(dt);
         if (isActive()) {
+            super.update(dt);
             spread(dt);
         }
     }

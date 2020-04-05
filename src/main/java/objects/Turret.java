@@ -1,6 +1,6 @@
 package objects;
 
-import javafx.scene.image.ImageView;
+import javafx.scene.Node;
 import javafx.scene.transform.Rotate;
 import utility.Vector2D;
 
@@ -28,7 +28,7 @@ public class Turret extends Defence {
     public void update(double dt) {
         if (isActive()) {
             super.update(dt);
-            ImageView imageView = getImageView();
+            Node imageView = getView();
             Rotate rotation = new Rotate(imageView.getRotate() + 100 * dt, getGlobalCenter().getX(), getGlobalCenter().getY());
             imageView.getTransforms().add(rotation);
         }

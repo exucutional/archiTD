@@ -18,6 +18,7 @@ public class Settings {
     private DoubleProperty particleHeight = new SimpleDoubleProperty(particleWidth.doubleValue());
     private DoubleProperty particleLifeSpanMax = new SimpleDoubleProperty(512);
     private DoubleProperty particleMaxSpeed = new SimpleDoubleProperty(4);
+    private DoubleProperty repellerStrength = new SimpleDoubleProperty(500000);
 
     public final double getParticleWidth() {
         return particleWidth.get();
@@ -33,6 +34,10 @@ public class Settings {
 
     public final double getParticleMaxSpeed() {
         return particleMaxSpeed.get();
+    }
+
+    public final double getRepellerStrength() {
+        return repellerStrength.get();
     }
 
 }

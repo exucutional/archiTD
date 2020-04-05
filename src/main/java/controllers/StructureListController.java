@@ -3,6 +3,7 @@ package controllers;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import objects.Repeller;
 import objects.Spreader;
 import objects.Structure;
 import objects.Turret;
@@ -14,6 +15,7 @@ public class StructureListController {
     @FXML private Button HubButton;
     @FXML private Button TurretButton;
     @FXML private Button SpreaderButton;
+    @FXML private Button RepellerButton;
 
     public void init(MainController controller) {
         mainController = controller;
@@ -21,7 +23,7 @@ public class StructureListController {
 
     @FXML public void hubButtonClicked(ActionEvent event) {
         Structure structure = new Structure(mainController.assetManager.getImage("structure-hub"), true);
-        mainController.mainPane.getChildren().add(structure.getImageView());
+        mainController.mainPane.getChildren().add(structure.getView());
         mainController.controlManager.placeStructure(structure);
     }
 
@@ -31,8 +33,8 @@ public class StructureListController {
         turret.setImage(mainController.assetManager.getImage("structure-turret-simple"), true);
         turret.setLocalCenter(16, 16);
         turret.setActive(false);
-        mainController.mainPane.getChildren().add(tower.getImageView());
-        mainController.mainPane.getChildren().add(turret.getImageView());
+        mainController.mainPane.getChildren().add(tower.getView());
+        mainController.mainPane.getChildren().add(turret.getView());
         mainController.controlManager.placeStructure(turret);
         mainController.objectManager.addStructure(turret);
     }
@@ -41,8 +43,17 @@ public class StructureListController {
         Structure structure = new Spreader(mainController.objectManager, 240);
         structure.setImage(mainController.assetManager.getImage("structure-tower-simple"), true);
         structure.setActive(false);
-        mainController.mainPane.getChildren().add(structure.getImageView());
+        mainController.mainPane.getChildren().add(structure.getView());
         mainController.controlManager.placeStructure(structure);
         mainController.objectManager.addStructure(structure);
+    }
+
+    @FXML public void repellerButtonClicked(ActionEvent event) {
+        Repeller structure = new Repeller();
+        structure.setActive(false);
+        mainController.mainPane.getChildren().add(structure.getView());
+        mainController.controlManager.placeStructure(structure);
+        mainController.objectManager.addStructure(structure);
+        mainController.objectManager.addForceObject(structure);
     }
 }

@@ -3,6 +3,7 @@ package objects;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import utility.Vector2D;
+import javafx.scene.Node;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.geometry.Rectangle2D;
 
@@ -81,12 +82,13 @@ public class SpriteObject extends Object {
         return new Rectangle2D(position.getX(), position.getY(), width, height);
     }
 
-    public ImageView getImageView() {
+    public Node getView() {
         return imageView;
     }
 
     public Vector2D getGlobalCenter() {
-        return new Vector2D(position.getX() + center.getX(), position.getY() + center.getY());
+        Vector2D c = getLocalCenter();
+        return new Vector2D(position.getX() + c.getX(), position.getY() + c.getY());
     }
 
     public double getWidth() {

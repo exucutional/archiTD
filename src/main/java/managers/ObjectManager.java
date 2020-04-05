@@ -27,14 +27,12 @@ public class ObjectManager {
     public void update(double dt) {
         forceObjects.stream().forEach(forceObject -> {
             entities.stream().parallel().forEach(entity -> {
-                entity.setAcceleration(forceObject.getForce(entity.getGlobalCenter()));
+                entity.addAcceleration(forceObject.getForce(entity.getGlobalCenter()));
             });
         });
         structures.stream().forEach(structure -> structure.update(dt));
         entities.stream().parallel().forEach(entity -> entity.update(dt));
-        entities.stream().parallel().forEach(entity -> {
-            entity.decreaseLifespan(dt * 100);
-        });
+        entities.stream().parallel().forEach(entity -> entity.decreaseLifespan(dt * 100));
         removeDeadEntities();
     }
 

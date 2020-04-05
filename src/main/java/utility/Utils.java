@@ -16,6 +16,14 @@ import javafx.scene.shape.Rectangle;
 
 public class Utils {
 
+    public static double clamp(double value, double min, double max) {
+        if (value < min)
+            return min;
+        if (value > max)
+            return max;
+        return value;
+    }
+
     public static Image createImage(Node node) {
         WritableImage wi;
         SnapshotParameters parameters = new SnapshotParameters();

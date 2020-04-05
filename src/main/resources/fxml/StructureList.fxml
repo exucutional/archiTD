@@ -17,6 +17,7 @@
          </HBox.margin>
       </Button>
       <Button fx:id="SpreaderButton" mnemonicParsing="false" onAction="#spreaderButtonClicked" prefHeight="80.0" prefWidth="80.0" styleClass="structureItem" text="Spreader" />
+      <Button fx:id="RepellerButton" mnemonicParsing="false" onAction="#repellerButtonClicked" prefHeight="80.0" prefWidth="80.0" styleClass="structureItem" text="Repeller" />
    </children>
    <padding>
       <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

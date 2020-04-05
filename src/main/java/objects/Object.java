@@ -44,6 +44,14 @@ abstract public class Object {
         setAcceleration(vec.getX(), vec.getY());
     }
 
+    public void addAcceleration(double x, double y) {
+        acceleration.add(x, y);
+    }
+
+    public void addAcceleration(Vector2D vec) {
+        acceleration.add(vec);
+    }
+
     public Vector2D getPosition() {
         return position;
     }
