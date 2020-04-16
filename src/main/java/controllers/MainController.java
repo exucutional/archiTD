@@ -11,6 +11,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
 import managers.AssetManager;
 import managers.ControlManager;
+import managers.EventManager;
 import managers.ObjectManager;
 import objects.Entity;
 
@@ -19,6 +20,7 @@ public class MainController {
     public ControlManager controlManager;
     public AssetManager assetManager;
     public ObjectManager objectManager;
+    public EventManager eventManager;
     @FXML public AnchorPane mainPane;
     @FXML public Canvas mainCanvas;
     @FXML public Node structureList;
@@ -32,11 +34,12 @@ public class MainController {
         structureListController.init(this);
     }
 
-    public void init(ControlManager cmanager, AssetManager amanager, ObjectManager omanager) {
-        controlManager = cmanager;
-        controlManager.initMainPane(mainPane);
-        assetManager = amanager;
-        objectManager = omanager;
+    public void init(ControlManager controlManager, AssetManager assetManager, ObjectManager objectManager, EventManager eventManager) {
+        this.controlManager = controlManager;
+        this.controlManager.init(mainPane, eventManager);
+        this.assetManager = assetManager;
+        this.objectManager = objectManager;
+        this.eventManager = eventManager;
     }
 
     public void render() {

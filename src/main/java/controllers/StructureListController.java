@@ -1,5 +1,7 @@
 package controllers;
 
+import events.EventListener;
+import events.EventType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -29,11 +31,17 @@ public class StructureListController {
 
     @FXML public void turretButtonClicked(ActionEvent event) {
         Structure tower = new Structure(mainController.assetManager.getImage("structure-tower-simple"), true);
-        Turret turret = new Turret(tower);
+        Turret turret = new Turret(tower, mainController.objectManager);
         turret.setImage(mainController.assetManager.getImage("structure-turret-simple"), true);
         turret.setLocalCenter(16, 16);
         turret.setActive(false);
         turret.setTarget(mainController.controlManager.mouseTarget);
+        mainController.eventManager.subscribe(EventType.SHOOT, new EventListener() {
+            @Override
+            public void update() {
+                turret.shoot();
+            }
+        });
         mainController.mainPane.getChildren().add(tower.getView());
         mainController.mainPane.getChildren().add(turret.getView());
         mainController.controlManager.placeStructure(turret);

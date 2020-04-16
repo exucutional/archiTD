@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import managers.AssetManager;
 import managers.ControlManager;
+import managers.EventManager;
 import managers.ObjectManager;
 import controllers.MainController;
 
@@ -19,6 +20,7 @@ public class App extends Application {
     private String title = "archiTD";
     private AnimationTimer mainLoop;
     private FXMLLoader mainLoader = new FXMLLoader();
+    private EventManager eventManager = new EventManager();
     private ControlManager controlManager = new ControlManager();
     private AssetManager assetManager = new AssetManager();
     private ObjectManager objectManager = new ObjectManager();
@@ -37,7 +39,7 @@ public class App extends Application {
             }
         });
         mainController = mainLoader.getController();
-        mainController.init(controlManager, assetManager, objectManager);
+        mainController.init(controlManager, assetManager, objectManager, eventManager);
 
         mainLoop = new AnimationTimer() {
             @Override

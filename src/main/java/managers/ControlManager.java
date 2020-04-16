@@ -1,5 +1,6 @@
 package managers;
 
+import events.EventType;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import objects.Structure;
@@ -34,12 +35,19 @@ public class ControlManager {
     public double mouseX = 0;
     public double mouseY = 0;
     public MouseTarget mouseTarget;
+
     private ControlMode controlMode;
     private Structure controlStructure;
+    private EventManager eventManager;
 
     public ControlManager() {
         controlMode = ControlMode.DEFAULT;
         mouseTarget = new MouseTarget();
+    }
+
+    public void init(AnchorPane pane, EventManager eventManager) {
+        this.eventManager = eventManager;
+        initMainPane(pane);
     }
 
     public void initMainPane(AnchorPane pane) {
@@ -56,6 +64,8 @@ public class ControlManager {
             if (event.getButton().equals(MouseButton.PRIMARY) && controlMode == ControlMode.LAYING) {
                 controlMode = ControlMode.DEFAULT;
                 controlStructure.setActive(true);
+            } else if (event.getButton().equals(MouseButton.PRIMARY)) {
+                eventManager.publish(EventType.SHOOT);
             }
         });
     }

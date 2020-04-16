@@ -11,7 +11,7 @@ import javafx.scene.text.TextBoundsType;
 import utility.Utils;
 import utility.Vector2D;
 
-public class Repeller extends Structure implements ForceObject{
+public class Repeller extends Structure implements ForceObject {
 
     private double factor = -1;
     private Group node;

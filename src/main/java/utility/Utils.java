@@ -35,21 +35,21 @@ public class Utils {
         return wi;
     }
 
-    public static Image[] createGradientCircles() {
-        int count = (int) Settings.get().getParticleLifeSpanMax();
+    public static Image[] createGradientCircles(Stop[] stops, int count, double radius) {
+        // int count = (int) Settings.get().getParticleLifeSpanMax();
         double width = count;
-        Stop[] stops = new Stop[] {
-            new Stop(0, Color.BLACK.deriveColor(1, 1, 1, 0.0)),
-            new Stop(0.3, Color.RED),
-            new Stop(0.9, Color.YELLOW),
-            new Stop(1, Color.WHITE)
-        };
+        // Stop[] stops = new Stop[] {
+        //     new Stop(0, Color.BLACK.deriveColor(1, 1, 1, 0.0)),
+        //     new Stop(0.3, Color.RED),
+        //     new Stop(0.9, Color.YELLOW),
+        //     new Stop(1, Color.WHITE)
+        // };
         LinearGradient linearGradient = new LinearGradient(0, 0, width, 0, false, CycleMethod.NO_CYCLE, stops);
         Rectangle rectangle = new Rectangle(width, 1);
         rectangle.setFill(linearGradient);
         Image lookupImage = createImage(rectangle);
         Image[] list = new Image[count];
-        double radius = Settings.get().getParticleWidth();
+        // double radius = Settings.get().getParticleWidth();
         for (int i = 0; i < count; i++) {
             Color color = lookupImage.getPixelReader().getColor(i, 0);
             Circle circle = new Circle(radius);
