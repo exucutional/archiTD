@@ -33,6 +33,7 @@ public class StructureListController {
         turret.setImage(mainController.assetManager.getImage("structure-turret-simple"), true);
         turret.setLocalCenter(16, 16);
         turret.setActive(false);
+        turret.setTarget(mainController.controlManager.mouseTarget);
         mainController.mainPane.getChildren().add(tower.getView());
         mainController.mainPane.getChildren().add(turret.getView());
         mainController.controlManager.placeStructure(turret);

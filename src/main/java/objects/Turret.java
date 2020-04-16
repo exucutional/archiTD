@@ -1,7 +1,9 @@
 package objects;
 
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.transform.Rotate;
+import javafx.scene.transform.Transform;
 import utility.Vector2D;
 
 public class Turret extends Defence {
@@ -28,9 +30,21 @@ public class Turret extends Defence {
     public void update(double dt) {
         if (isActive()) {
             super.update(dt);
-            Node imageView = getView();
-            Rotate rotation = new Rotate(imageView.getRotate() + 100 * dt, getGlobalCenter().getX(), getGlobalCenter().getY());
-            imageView.getTransforms().add(rotation);
+            Target target = getTarget();
+            if (target != null) {
+                Node imageView = getView();
+                Vector2D direction = Vector2D.sub(target.getGlobalCenter(), getGlobalCenter());
+                double angle = Math.toDegrees(Vector2D.getAngle(direction, new Vector2D(1, 0)));
+                if (direction.getY() < 0) {
+                    angle = 360 - angle;
+                }
+                if (!Double.isNaN(angle)) {
+                    Rotate rotation = new Rotate(angle, getGlobalCenter().getX(), getGlobalCenter().getY());
+                    ObservableList<Transform> transform = imageView.getTransforms();
+                    transform.clear();
+                    transform.add(rotation);
+                }
+            }
         }
     }
 

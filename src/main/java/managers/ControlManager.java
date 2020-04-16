@@ -3,6 +3,7 @@ package managers;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import objects.Structure;
+import objects.Target;
 import utility.Vector2D;
 
 enum ControlMode {
@@ -10,15 +11,35 @@ enum ControlMode {
     LAYING,
 }
 
+class MouseTarget implements Target {
+
+    private Vector2D position = new Vector2D();
+
+    public void setPosition(double x, double y) {
+        position.setVector(x, y);
+    }
+
+    public Vector2D getPosition() {
+        return position;
+    }
+
+    public Vector2D getGlobalCenter() {
+        return getPosition();
+    }
+
+}
+
 public class ControlManager {
 
     public double mouseX = 0;
     public double mouseY = 0;
+    public MouseTarget mouseTarget;
     private ControlMode controlMode;
     private Structure controlStructure;
 
     public ControlManager() {
         controlMode = ControlMode.DEFAULT;
+        mouseTarget = new MouseTarget();
     }
 
     public void initMainPane(AnchorPane pane) {
@@ -29,6 +50,7 @@ public class ControlManager {
             }
             mouseX = event.getX();
             mouseY = event.getY();
+            mouseTarget.setPosition(mouseX, mouseY);
         });
         pane.setOnMouseClicked(event -> {
             if (event.getButton().equals(MouseButton.PRIMARY) && controlMode == ControlMode.LAYING) {

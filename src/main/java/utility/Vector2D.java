@@ -110,4 +110,12 @@ public class Vector2D {
         return vec;
     }
 
+    public static double dotProduct(Vector2D vec1, Vector2D vec2) {
+        return vec1.getX() * vec2.getX() + vec1.getY() * vec2.getY();
+    }
+
+    public static double getAngle(Vector2D vec1, Vector2D vec2) {
+        return Math.acos(dotProduct(vec1, vec2) / (vec1.magnitude() * vec2.magnitude()));
+    }
+
 }

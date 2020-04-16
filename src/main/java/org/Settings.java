@@ -16,7 +16,7 @@ public class Settings {
 
     private DoubleProperty particleWidth = new SimpleDoubleProperty(20);
     private DoubleProperty particleHeight = new SimpleDoubleProperty(particleWidth.doubleValue());
-    private DoubleProperty particleLifeSpanMax = new SimpleDoubleProperty(512);
+    private DoubleProperty particleLifeSpanMax = new SimpleDoubleProperty(1024);
     private DoubleProperty particleMaxSpeed = new SimpleDoubleProperty(4);
     private DoubleProperty repellerStrength = new SimpleDoubleProperty(500000);
 
