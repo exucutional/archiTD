@@ -1,8 +1,9 @@
 package objects;
 
-abstract class GameObject extends SpriteObject{
+abstract class GameObject extends SpriteObject {
     private Boolean isActive = true;
     private Boolean isStatic = false;
+    private Boolean isDeleted = false;
     private String tag;
 
     public void setActive(Boolean act) {
@@ -11,6 +12,10 @@ abstract class GameObject extends SpriteObject{
 
     public void setStatic(Boolean st) {
         isStatic = st;
+    }
+
+    public void setDelete(Boolean del) {
+        isDeleted = del;
     }
 
     public void setTag(String str) {
@@ -23,6 +28,10 @@ abstract class GameObject extends SpriteObject{
 
     public Boolean isStatic() {
         return isStatic;
+    }
+
+    public Boolean isDeleted() {
+        return isDeleted;
     }
 
     public String getTag() {

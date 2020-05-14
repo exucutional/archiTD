@@ -60,14 +60,16 @@ public class Turret extends Defence {
             direction.normalize();
             double vX = 500 * direction.getX();
             double vY = 500 * direction.getY();
-            Entity entity = new Entity(Settings.get().getParticleLifeSpanMax() / 2);
+            Eradicator eradicator = new Eradicator(Settings.get().getParticleLifeSpanMax());
             double halfWidth = Settings.get().getParticleWidth() / 2;
-            entity.setPosition(
+            eradicator.setPosition(
                 getPosition().getX() - halfWidth,
                 getPosition().getY() - halfWidth);
-            entity.setVelocity(vX, vY);
-            entity.setAcceleration(0, 0);
-            objectManager.addEntity(entity);
+            eradicator.setVelocity(vX, vY);
+            eradicator.setAcceleration(0, 0);
+            objectManager.addEntity(eradicator);
+            objectManager.addForceObject(eradicator);
+            objectManager.addEradicator(eradicator);
         }
     }
 

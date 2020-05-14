@@ -49,7 +49,7 @@ public class StructureListController {
     }
 
     @FXML public void spreaderButtonClicked(ActionEvent event) {
-        Structure structure = new Spreader(mainController.objectManager, 240);
+        Structure structure = new Spreader(mainController.objectManager, 512);
         structure.setImage(mainController.assetManager.getImage("structure-tower-simple"), true);
         structure.setActive(false);
         mainController.mainPane.getChildren().add(structure.getView());

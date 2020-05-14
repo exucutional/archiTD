@@ -21,6 +21,9 @@ public class Entity extends GameObject implements Target {
 
     public void decreaseLifespan(double dec) {
         this.lifespan -= dec;
+        if (lifespan < 0) {
+            setDelete(true);
+        }
     }
 
     public double getLifespan() {
@@ -31,9 +34,4 @@ public class Entity extends GameObject implements Target {
         return maxLifespan;
     }
 
-    public boolean isDead() {
-        if (lifespan > 0)
-            return false;
-        return true;
-    }
 }

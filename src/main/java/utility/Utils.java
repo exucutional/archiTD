@@ -1,7 +1,5 @@
 package utility;
 
-import org.Settings;
-
 import javafx.scene.Node;
 import javafx.scene.SnapshotParameters;
 import javafx.scene.image.Image;

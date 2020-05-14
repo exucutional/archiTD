@@ -35,9 +35,9 @@ public class Spreader extends Structure {
 
     public void spread(double dt) {
         dtAcc += dt;
-        if (dtAcc >= period) {
+        while (dtAcc >= period) {
             objectManager.addEntity(createParticle());
-            dtAcc = 0;
+            dtAcc -= period;
         }
     }
 

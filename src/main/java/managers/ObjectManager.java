@@ -5,21 +5,37 @@ import java.util.Iterator;
 
 import javafx.scene.canvas.GraphicsContext;
 import objects.Entity;
+import objects.Eradicator;
 import objects.ForceObject;
 import objects.Structure;
 
 public class ObjectManager {
 
-    private ArrayList<Structure> structures = new ArrayList<Structure>();
-    private ArrayList<Entity> entities = new ArrayList<Entity>();
-    private ArrayList<ForceObject> forceObjects = new ArrayList<ForceObject>();
+    private ArrayList<Structure> structures = new ArrayList<>();
+    private ArrayList<Entity> entities = new ArrayList<>();
+    private ArrayList<ForceObject> forceObjects = new ArrayList<>();
+    private ArrayList<Eradicator> eradicators = new ArrayList<>();
 
-    private void removeDeadEntities() {
-        Iterator<Entity> iter = entities.iterator();
-        while (iter.hasNext()) {
-            Entity entity = iter.next();
-            if (entity.isDead()) {
-                iter.remove();
+    private void removeDeletedObjects() {
+        Iterator<Entity> iterEn = entities.iterator();
+        while (iterEn.hasNext()) {
+            Entity entity = iterEn.next();
+            if (entity.isDeleted()) {
+                iterEn.remove();
+            }
+        }
+        Iterator<ForceObject> iterFobj = forceObjects.iterator();
+        while (iterFobj.hasNext()) {
+            ForceObject fobj = iterFobj.next();
+            if (fobj.isDeleted()) {
+                iterFobj.remove();
+            }
+        }
+        Iterator<Eradicator> iterErad = eradicators.iterator();
+        while (iterErad.hasNext()) {
+            Eradicator eradicator = iterErad.next();
+            if (eradicator.isDeleted()) {
+                iterErad.remove();
             }
         }
     }
@@ -30,10 +46,17 @@ public class ObjectManager {
                 entity.addAcceleration(forceObject.getForce(entity.getGlobalCenter()));
             });
         });
+        eradicators.stream().parallel().forEach(eradicator -> {
+            entities.stream().parallel().forEach(entity -> {
+                double decrement = eradicator.getDecrement(entity.getGlobalCenter());
+                entity.decreaseLifespan(5 * decrement);
+                eradicator.decreaseLifespan(decrement);
+            });
+        });
         structures.stream().forEach(structure -> structure.update(dt));
         entities.stream().parallel().forEach(entity -> entity.update(dt));
         entities.stream().parallel().forEach(entity -> entity.decreaseLifespan(dt * 100));
-        removeDeadEntities();
+        removeDeletedObjects();
     }
 
     public void render(GraphicsContext gc) {
@@ -50,6 +73,10 @@ public class ObjectManager {
 
     public void addForceObject(ForceObject forceObject) {
         forceObjects.add(forceObject);
+    }
+
+    public void addEradicator(Eradicator eradicator) {
+        eradicators.add(eradicator);
     }
 
     public Iterator<Entity> getEntityIterator() {

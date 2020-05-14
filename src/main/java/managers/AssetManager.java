@@ -17,9 +17,9 @@ public class AssetManager {
     public void init() {
         Stop[] stops = new Stop[] {
             new Stop(0, Color.BLACK.deriveColor(1, 1, 1, 0.0)),
-            new Stop(0.3, Color.RED),
-            new Stop(0.9, Color.YELLOW),
-            new Stop(1, Color.WHITE)
+            new Stop(0.3, Color.LIGHTGREEN),
+            new Stop(0.9, Color.GREEN),
+            new Stop(1, Color.BLACK)
         };
         Image[] circles = Utils.createGradientCircles(stops, (int) Settings.get().getParticleLifeSpanMax(), Settings.get().getParticleWidth());
         for (int i = 0; i < Settings.get().getParticleLifeSpanMax(); i++) {
