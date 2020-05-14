@@ -83,4 +83,8 @@ public class ObjectManager {
         return entities.iterator();
     }
 
+    public Iterator<Structure> getStructureIterator() {
+        return structures.iterator();
+    }
+
 }

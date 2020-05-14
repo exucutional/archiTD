@@ -19,6 +19,8 @@ public class Settings {
     private DoubleProperty particleLifeSpanMax = new SimpleDoubleProperty(1024);
     private DoubleProperty particleMaxSpeed = new SimpleDoubleProperty(4);
     private DoubleProperty repellerStrength = new SimpleDoubleProperty(500000);
+    private DoubleProperty connectionStroke = new SimpleDoubleProperty(5);
+    private DoubleProperty placeRadius = new SimpleDoubleProperty(300);
 
     public final double getParticleWidth() {
         return particleWidth.get();
@@ -38,6 +40,14 @@ public class Settings {
 
     public final double getRepellerStrength() {
         return repellerStrength.get();
+    }
+
+    public final double getConnectionStroke() {
+        return connectionStroke.get();
+    }
+
+    public final double getPlaceRadius() {
+        return placeRadius.get();
     }
 
 }
