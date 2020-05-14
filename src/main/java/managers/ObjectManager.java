@@ -61,10 +61,12 @@ public class ObjectManager {
         });
         defences.stream().forEach(defence -> {
             defence.setTarget(null);
+            double minRadius = Settings.get().getTargetRadius();
             for (Target enemy : enemies) {
-                if (defence.getGlobalCenter().sub(enemy.getGlobalCenter()).magnitude() < Settings.get().getTargetRadius()) {
+                double radius = defence.getGlobalCenter().sub(enemy.getGlobalCenter()).magnitude();
+                if (radius < minRadius) {
                     defence.setTarget(enemy);
-                    break;
+                    minRadius = radius;
                 }
             }
         });
