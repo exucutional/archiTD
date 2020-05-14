@@ -13,10 +13,13 @@ public class Turret extends Defence {
 
     private Structure tower;
     private ObjectManager objectManager;
+    private double shootRate;
+    private double acc;
 
     public Turret(Structure tower, ObjectManager objectManager) {
         this.tower = tower;
         this.objectManager = objectManager;
+        shootRate = Settings.get().getShootRate();
     }
 
     @Override
@@ -33,6 +36,7 @@ public class Turret extends Defence {
 
     @Override
     public void update(double dt) {
+        acc += dt;
         if (isActive()) {
             super.update(dt);
             Target target = getTarget();
@@ -49,13 +53,14 @@ public class Turret extends Defence {
                     transform.clear();
                     transform.add(rotation);
                 }
+                shoot();
             }
         }
     }
 
     public void shoot() {
         Target target = getTarget();
-        if (target != null) {
+        if (target != null && acc >= shootRate) {
             Vector2D direction = Vector2D.sub(target.getGlobalCenter(), getGlobalCenter());
             direction.normalize();
             double vX = 500 * direction.getX();
@@ -70,6 +75,7 @@ public class Turret extends Defence {
             objectManager.addEntity(eradicator);
             objectManager.addForceObject(eradicator);
             objectManager.addEradicator(eradicator);
+            acc = 0;
         }
     }
 

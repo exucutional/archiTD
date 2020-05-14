@@ -3,11 +3,15 @@ package managers;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.Settings;
+
 import javafx.scene.canvas.GraphicsContext;
+import objects.Defence;
 import objects.Entity;
 import objects.Eradicator;
 import objects.ForceObject;
 import objects.Structure;
+import objects.Target;
 
 public class ObjectManager {
 
@@ -15,6 +19,8 @@ public class ObjectManager {
     private ArrayList<Entity> entities = new ArrayList<>();
     private ArrayList<ForceObject> forceObjects = new ArrayList<>();
     private ArrayList<Eradicator> eradicators = new ArrayList<>();
+    private ArrayList<Target> enemies = new ArrayList<>();
+    private ArrayList<Defence> defences = new ArrayList<>();
 
     private void removeDeletedObjects() {
         Iterator<Entity> iterEn = entities.iterator();
@@ -53,6 +59,15 @@ public class ObjectManager {
                 eradicator.decreaseLifespan(decrement);
             });
         });
+        defences.stream().forEach(defence -> {
+            defence.setTarget(null);
+            for (Target enemy : enemies) {
+                if (defence.getGlobalCenter().sub(enemy.getGlobalCenter()).magnitude() < Settings.get().getTargetRadius()) {
+                    defence.setTarget(enemy);
+                    break;
+                }
+            }
+        });
         structures.stream().forEach(structure -> structure.update(dt));
         entities.stream().parallel().forEach(entity -> entity.update(dt));
         entities.stream().parallel().forEach(entity -> entity.decreaseLifespan(dt * 100));
@@ -77,6 +92,14 @@ public class ObjectManager {
 
     public void addEradicator(Eradicator eradicator) {
         eradicators.add(eradicator);
+    }
+
+    public void addEnemy(Target enemy) {
+        enemies.add(enemy);
+    }
+
+    public void addDefence(Defence defence) {
+        defences.add(defence);
     }
 
     public Iterator<Entity> getEntityIterator() {

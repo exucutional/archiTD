@@ -54,6 +54,7 @@ public class StructureListController {
         mainController.mainPane.getChildren().add(turret.getView());
         mainController.controlManager.placeStructure(turret);
         mainController.objectManager.addStructure(turret);
+        mainController.objectManager.addDefence(turret);
     }
 
     @FXML public void spreaderButtonClicked(ActionEvent event) {
@@ -63,6 +64,7 @@ public class StructureListController {
         mainController.mainPane.getChildren().add(structure.getView());
         mainController.controlManager.placeStructure(structure);
         mainController.objectManager.addStructure(structure);
+        mainController.objectManager.addEnemy(structure);
     }
 
     @FXML public void repellerButtonClicked(ActionEvent event) {

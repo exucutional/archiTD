@@ -21,6 +21,8 @@ public class Settings {
     private DoubleProperty repellerStrength = new SimpleDoubleProperty(500000);
     private DoubleProperty connectionStroke = new SimpleDoubleProperty(5);
     private DoubleProperty placeRadius = new SimpleDoubleProperty(300);
+    private DoubleProperty shootRate = new SimpleDoubleProperty(0.5);
+    private DoubleProperty targetRadius = new SimpleDoubleProperty(400);
 
     public final double getParticleWidth() {
         return particleWidth.get();
@@ -48,6 +50,14 @@ public class Settings {
 
     public final double getPlaceRadius() {
         return placeRadius.get();
+    }
+
+    public final double getShootRate() {
+        return shootRate.get();
+    }
+
+    public final double getTargetRadius() {
+        return targetRadius.get();
     }
 
 }

@@ -2,7 +2,7 @@ package objects;
 
 import javafx.scene.image.Image;
 
-public class Structure extends GameObject {
+public class Structure extends GameObject implements Target {
 
     public Structure() {
 
