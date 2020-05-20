@@ -65,7 +65,7 @@ public class ObjectManager {
             entities.stream().parallel().forEach(entity -> {
                 double decrement = eradicator.getDecrement(entity.getGlobalCenter());
                 entity.decreaseLifespan(5 * decrement);
-                eradicator.decreaseLifespan(decrement);
+                eradicator.decreaseLifespan(4 * decrement);
             });
         });
         defences.stream().forEach(defence -> {

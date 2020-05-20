@@ -14,7 +14,7 @@ public class Connection extends Structure {
     public Connection(Vector2D begin, Vector2D end) {
         line = new Line(begin.getX(), begin.getY(), end.getX(), end.getY());
         line.setStrokeWidth(Settings.get().getConnectionStroke());
-        line.setStroke(Color.BLACK);
+        line.setStroke(Color.BLACK.deriveColor(1, 1, 1, 0.1));
         line.setSmooth(true);
     }
 
