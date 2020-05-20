@@ -13,7 +13,7 @@ import managers.AssetManager;
 import managers.ControlManager;
 import managers.EventManager;
 import managers.ObjectManager;
-import objects.Entity;
+import objects.Gas;
 
 public class MainController {
 
@@ -44,12 +44,12 @@ public class MainController {
 
     public void render() {
         GraphicsContext gc = mainCanvas.getGraphicsContext2D();
-        Iterator<Entity> iter = objectManager.getEntityIterator();
+        Iterator<Gas> iter = objectManager.getGasIterator();
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, mainCanvas.getWidth(), mainCanvas.getHeight());
         while (iter.hasNext()) {
-            Entity entity = iter.next();
-            entity.setImage(assetManager.getImage(String.format("entity-gas-%d", (int) Math.floor(entity.getLifespan()))), false);
+            Gas gas = iter.next();
+            gas.setImage(assetManager.getImage(String.format("entity-gas-%d", (int) Math.floor(gas.getLifespan()))), false);
         }
         objectManager.render(gc);
     }

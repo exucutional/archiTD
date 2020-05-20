@@ -10,6 +10,7 @@ import objects.Defence;
 import objects.Entity;
 import objects.Eradicator;
 import objects.ForceObject;
+import objects.Gas;
 import objects.Structure;
 import objects.Target;
 
@@ -17,6 +18,7 @@ public class ObjectManager {
 
     private ArrayList<Structure> structures = new ArrayList<>();
     private ArrayList<Entity> entities = new ArrayList<>();
+    private ArrayList<Gas> gas = new ArrayList<>();
     private ArrayList<ForceObject> forceObjects = new ArrayList<>();
     private ArrayList<Eradicator> eradicators = new ArrayList<>();
     private ArrayList<Target> enemies = new ArrayList<>();
@@ -28,6 +30,13 @@ public class ObjectManager {
             Entity entity = iterEn.next();
             if (entity.isDeleted()) {
                 iterEn.remove();
+            }
+        }
+        Iterator<Gas> iterGas = gas.iterator();
+        while (iterGas.hasNext()) {
+            Gas gas = iterGas.next();
+            if (gas.isDeleted()) {
+                iterGas.remove();
             }
         }
         Iterator<ForceObject> iterFobj = forceObjects.iterator();
@@ -104,8 +113,12 @@ public class ObjectManager {
         defences.add(defence);
     }
 
-    public Iterator<Entity> getEntityIterator() {
-        return entities.iterator();
+    public void addGasEntity(Gas gas) {
+        this.gas.add(gas);
+    }
+
+    public Iterator<Gas> getGasIterator() {
+        return gas.iterator();
     }
 
     public Iterator<Structure> getStructureIterator() {

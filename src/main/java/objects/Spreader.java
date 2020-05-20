@@ -18,25 +18,27 @@ public class Spreader extends Structure {
         period = 1 / frequency;
     }
 
-    private Entity createParticle() {
+    private Gas createParticle() {
         // double vX = 100 * (random.nextGaussian() * 0.3);
         // double vY = 100 * (random.nextGaussian() * 0.3 - 1.0);
         double vX = 200 * (random.nextDouble() - 0.5);
         double vY = 200 * (random.nextDouble() - 0.5);
-        Entity entity = new Entity(Settings.get().getParticleLifeSpanMax());
+        Gas gas = new Gas(Settings.get().getParticleLifeSpanMax());
         double halfWidth = Settings.get().getParticleWidth() / 2;
-        entity.setPosition(
+        gas.setPosition(
             getPosition().getX() - halfWidth,
             getPosition().getY() - halfWidth);
-        entity.setVelocity(vX, vY);
-        entity.setAcceleration(0, 0);
-        return entity;
+        gas.setVelocity(vX, vY);
+        gas.setAcceleration(0, 0);
+        return gas;
     }
 
     public void spread(double dt) {
         dtAcc += dt;
         while (dtAcc >= period) {
-            objectManager.addEntity(createParticle());
+            Gas particle = createParticle();
+            objectManager.addEntity(particle);
+            objectManager.addGasEntity(particle);
             dtAcc -= period;
         }
     }
