@@ -37,9 +37,9 @@ public class Spreader extends Structure {
         dtAcc += dt;
         while (dtAcc >= period) {
             Gas particle = createParticle();
-            objectManager.addEntity(particle);
+            // objectManager.addEntity(particle);
             objectManager.addGasEntity(particle);
-            objectManager.addDamageObject(particle);
+            // objectManager.addDamageObject(particle);
             dtAcc -= period;
         }
     }
@@ -61,7 +61,7 @@ public class Spreader extends Structure {
     public void delete() {
         for (int i = 0; i < 500; i++) {
             Gas particle = createParticle();
-            particle.getVelocity().mul(2);
+            particle.getVelocity().mul(1.2);
             objectManager.addEntity(particle);
             objectManager.addGasEntity(particle);
             objectManager.addDamageObject(particle);

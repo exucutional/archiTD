@@ -15,6 +15,7 @@ import objects.ForceObject;
 import objects.Gas;
 import objects.Structure;
 import objects.Target;
+import utility.Vector2D;
 
 public class ObjectManager {
 
@@ -134,7 +135,16 @@ public class ObjectManager {
             }
         });
         structures.stream().forEach(structure -> structure.update(dt));
-        entities.stream().parallel().forEach(entity -> entity.update(dt));
+        entities.stream().parallel().forEach(entity -> {
+            entity.update(dt);
+            Vector2D position = entity.getPosition();
+            if (position.getX() + entity.getWidth() < 0
+                || position.getX() > Settings.get().getWindowWidth()
+                || position.getY() + entity.getHeight() < 0
+                || position.getY() > Settings.get().getWindowHeight()) {
+                    entity.setDelete(true);
+                }
+        });
         entities.stream().parallel().forEach(entity -> entity.decreaseLifespan(dt * 100));
         removeDeletedObjects();
     }
@@ -170,6 +180,8 @@ public class ObjectManager {
     public void addGasEntity(Gas gas) {
         if (this.gas.size() < gasLimit) {
             this.gas.add(gas);
+            this.entities.add(gas);
+            this.damageObjects.add(gas);
         }
     }
 

@@ -27,7 +27,7 @@ public class Settings {
     private DoubleProperty defaultDamage = new SimpleDoubleProperty(10);
     private DoubleProperty windowWidth = new SimpleDoubleProperty(1280);
     private DoubleProperty windowHeight = new SimpleDoubleProperty(720);
-    private DoubleProperty gasLimit = new SimpleDoubleProperty(10000);
+    private DoubleProperty gasLimit = new SimpleDoubleProperty(18000);
 
     public final double getParticleWidth() {
         return particleWidth.get();

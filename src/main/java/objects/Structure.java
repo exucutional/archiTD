@@ -58,4 +58,15 @@ public class Structure extends GameObject implements Target {
         }
     }
 
+    @Override
+    public Boolean isActive() {
+        if (super.isActive()) {
+            if (connections.size() > 0) {
+                return true;
+            }
+            return false;
+        }
+        return false;
+    }
+
 }

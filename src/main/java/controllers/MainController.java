@@ -67,7 +67,7 @@ public class MainController {
                         || position.getX() + x < 0
                         || position.getY() + y > Settings.get().getWindowHeight()
                         || position.getY() + y < 0) {
-                            x = (random.nextGaussian() - 0.8) * radius;
+                            x = (random.nextGaussian() - 1.5) * radius;
                             y = random.nextGaussian() * radius;
                     }
                     structure.setPosition(position.getX() + x, position.getY() + y);

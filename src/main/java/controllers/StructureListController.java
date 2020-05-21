@@ -41,6 +41,9 @@ public class StructureListController {
         Iterator<Structure> iter = mainController.objectManager.getStructureIterator();
         while (iter.hasNext()) {
             Structure structure = iter.next();
+            if (structure == placeStructure) {
+                break;
+            }
             Vector2D begin = structure.getGlobalCenter();
             Vector2D end = placeStructure.getGlobalCenter();
             if (begin.sub(end).magnitude() < Settings.get().getPlaceRadius() && structure.isEnemy() == placeStructure.isEnemy()) {
