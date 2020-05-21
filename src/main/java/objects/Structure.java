@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 
 public class Structure extends GameObject implements Target {
 
+    private Boolean isEnemy = false;
     private Pane parent;
     private double durability = 0;
     private ArrayList<Connection> connections = new ArrayList<>();
@@ -38,7 +39,11 @@ public class Structure extends GameObject implements Target {
     }
 
     public Boolean isEnemy() {
-        return false;
+        return isEnemy;
+    }
+
+    public void setEnemy(Boolean isEnemy) {
+        this.isEnemy = isEnemy;
     }
 
     public void delete() {

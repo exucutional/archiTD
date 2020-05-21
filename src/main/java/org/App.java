@@ -14,6 +14,7 @@ import managers.ControlManager;
 import managers.EventManager;
 import managers.ObjectManager;
 import controllers.MainController;
+import events.EventType;
 
 public class App extends Application {
 
@@ -27,6 +28,8 @@ public class App extends Application {
     private MainController mainController;
     private Parent root;
     private long prevNanos = 0;
+    private double spawnRate = 3;
+    private double acc = 10.1;
 
     @Override
     public void init() throws Exception {
@@ -51,6 +54,11 @@ public class App extends Application {
                 long deltaNanos = now - prevNanos;
                 prevNanos = now;
                 double dt = deltaNanos / 1.0e9;
+                acc += dt;
+                if (acc > spawnRate) {
+                    acc = 0;
+                    mainController.eventManager.publish(EventType.SPAWN_ENEMY);
+                }
                 objectManager.update(dt);
                 mainController.render();
             }
@@ -60,7 +68,7 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         stage.setTitle(title);
-        stage.setScene(new Scene(root));
+        stage.setScene(new Scene(root, Settings.get().getWindowWidth(), Settings.get().getWindowHeight()));
 
         mainLoop.start();
 

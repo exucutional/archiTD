@@ -80,4 +80,9 @@ public class Turret extends Defence {
         }
     }
 
+    @Override
+    public void delete() {
+        super.delete();
+        tower.delete();
+    }
 }

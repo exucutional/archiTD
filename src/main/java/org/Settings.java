@@ -25,6 +25,9 @@ public class Settings {
     private DoubleProperty targetRadius = new SimpleDoubleProperty(400);
     private DoubleProperty defaultDurability = new SimpleDoubleProperty(50);
     private DoubleProperty defaultDamage = new SimpleDoubleProperty(10);
+    private DoubleProperty windowWidth = new SimpleDoubleProperty(1280);
+    private DoubleProperty windowHeight = new SimpleDoubleProperty(720);
+    private DoubleProperty gasLimit = new SimpleDoubleProperty(10000);
 
     public final double getParticleWidth() {
         return particleWidth.get();
@@ -68,6 +71,18 @@ public class Settings {
 
     public final double getDefaultDamage() {
         return defaultDamage.get();
+    }
+
+    public final double getWindowWidth() {
+        return windowWidth.get();
+    }
+
+    public final double getWindowHeight() {
+        return windowHeight.get();
+    }
+
+    public final double getGasLimit() {
+        return gasLimit.get();
     }
 
 }

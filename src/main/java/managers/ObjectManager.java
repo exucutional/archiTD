@@ -2,6 +2,7 @@ package managers;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Random;
 
 import org.Settings;
 
@@ -16,6 +17,8 @@ import objects.Structure;
 import objects.Target;
 
 public class ObjectManager {
+
+    private double gasLimit = Settings.get().getGasLimit();
 
     private ArrayList<Structure> structures = new ArrayList<>();
     private ArrayList<Entity> entities = new ArrayList<>();
@@ -165,7 +168,9 @@ public class ObjectManager {
     }
 
     public void addGasEntity(Gas gas) {
-        this.gas.add(gas);
+        if (this.gas.size() < gasLimit) {
+            this.gas.add(gas);
+        }
     }
 
     public void addDamageObject(DamageObject dobj) {
@@ -178,6 +183,14 @@ public class ObjectManager {
 
     public Iterator<Structure> getStructureIterator() {
         return structures.iterator();
+    }
+
+    public Target getRandomTarget() {
+        Random random = new Random();
+        if (enemies.size() == 0) {
+            return null;
+        }
+        return enemies.get((int) Math.floor(random.nextDouble() * enemies.size()));
     }
 
 }

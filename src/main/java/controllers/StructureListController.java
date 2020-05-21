@@ -32,27 +32,32 @@ public class StructureListController {
         mainController.eventManager.subscribe(EventType.PLACE, new EventListener() {
             @Override
             public void update() {
-                Iterator<Structure> iter = mainController.objectManager.getStructureIterator();
-                while (iter.hasNext()) {
-                    Structure structure = iter.next();
-                    Vector2D begin = structure.getGlobalCenter();
-                    Vector2D end = placeStructure.getGlobalCenter();
-                    if (begin.sub(end).magnitude() < Settings.get().getPlaceRadius() && structure.isEnemy() == placeStructure.isEnemy()) {
-                        Connection connection = new Connection(structure.getGlobalCenter(), placeStructure.getGlobalCenter());
-                        connection.setParent(mainController.mainPane);
-                        structure.addConnection(connection);
-                        placeStructure.addConnection(connection);
-                        mainController.mainPane.getChildren().add(connection.getView());
-                        Platform.runLater(new Runnable(){
-                            @Override
-                            public void run() {
-                                mainController.objectManager.addStructure(connection);
-                            }
-                        });
-                    }
-                }
+                connectStructure(placeStructure);
             }
         });
+    }
+
+    public void connectStructure(Structure placeStructure) {
+        Iterator<Structure> iter = mainController.objectManager.getStructureIterator();
+        while (iter.hasNext()) {
+            Structure structure = iter.next();
+            Vector2D begin = structure.getGlobalCenter();
+            Vector2D end = placeStructure.getGlobalCenter();
+            if (begin.sub(end).magnitude() < Settings.get().getPlaceRadius() && structure.isEnemy() == placeStructure.isEnemy()) {
+                Connection connection = new Connection(structure.getGlobalCenter(), placeStructure.getGlobalCenter());
+                connection.setParent(mainController.mainPane);
+                connection.setEnemy(structure.isEnemy());
+                structure.addConnection(connection);
+                placeStructure.addConnection(connection);
+                mainController.mainPane.getChildren().add(connection.getView());
+                Platform.runLater(new Runnable(){
+                    @Override
+                    public void run() {
+                        mainController.objectManager.addStructure(connection);
+                    }
+                });
+            }
+        }
     }
 
     public void init(MainController controller) {
@@ -89,13 +94,13 @@ public class StructureListController {
         mainController.mainPane.getChildren().add(turret.getView());
         mainController.controlManager.placeStructure(turret);
         mainController.objectManager.addStructure(turret);
-        mainController.objectManager.addStructure(tower);
+        // mainController.objectManager.addStructure(tower);
         mainController.objectManager.addDefence(turret);
         placeEvent(tower);
     }
 
     @FXML public void spreaderButtonClicked(ActionEvent event) {
-        Structure structure = new Spreader(mainController.objectManager, 512);
+        Structure structure = new Spreader(mainController.objectManager, 256);
         structure.setImage(mainController.assetManager.getImage("structure-spreader"), true);
         structure.setActive(false);
         structure.setParent(mainController.mainPane);
