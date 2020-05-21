@@ -49,8 +49,8 @@ public class App extends Application {
                     return;
                 }
                 long deltaNanos = now - prevNanos;
-			    prevNanos = now;
-			    double dt = deltaNanos / 1.0e9;
+                prevNanos = now;
+                double dt = deltaNanos / 1.0e9;
                 objectManager.update(dt);
                 mainController.render();
             }

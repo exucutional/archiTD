@@ -95,15 +95,30 @@ public class ObjectManager {
             });
         });
         defences.stream().forEach(defence -> {
-            defence.setTarget(null);
+            Target target = null;
             double minRadius = Settings.get().getTargetRadius();
             for (Target enemy : enemies) {
                 double radius = defence.getGlobalCenter().sub(enemy.getGlobalCenter()).magnitude();
                 if (radius < minRadius) {
-                    defence.setTarget(enemy);
+                    target = enemy;
                     minRadius = radius;
                 }
             }
+            if (target == null) {
+                int gasLimit = 50;
+                for (Gas enemy : gas) {
+                    int count = 0;
+                    double radius = defence.getGlobalCenter().sub(enemy.getGlobalCenter()).magnitude();
+                    if (radius < minRadius) {
+                        target = enemy;
+                        minRadius = radius;
+                        if (count++ > gasLimit) {
+                            break;
+                        }
+                    }
+                }
+            }
+            defence.setTarget(target);
         });
         damageObjects.stream().forEach(dObj -> {
             for (Structure structure : structures) {

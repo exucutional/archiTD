@@ -33,9 +33,10 @@ public class AssetManager {
         // for (int i = 0; i < Settings.get().getParticleLifeSpanMax(); i++) {
         //     images.put(String.format(""));
         // }
-        images.put("structure-hub", new Image("/assets/structures/hub.png"));
+        images.put("structure-hub", new Image("/assets/structures/hub_100x100.jpg"));
         images.put("structure-tower-simple", new Image("/assets/structures/tower-simple.png"));
         images.put("structure-turret-simple", new Image("/assets/structures/turret-simple.png"));
+        images.put("structure-spreader", new Image("/assets/structures/spreader.png"));
     }
 
     public Image putImage(String key, Image image) {

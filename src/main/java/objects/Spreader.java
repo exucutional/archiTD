@@ -24,10 +24,10 @@ public class Spreader extends Structure {
         double vX = 200 * (random.nextDouble() - 0.5);
         double vY = 200 * (random.nextDouble() - 0.5);
         Gas gas = new Gas(Settings.get().getParticleLifeSpanMax());
-        double halfWidth = Settings.get().getParticleWidth() / 2;
+        double width = Settings.get().getParticleWidth();
         gas.setPosition(
-            getPosition().getX() - halfWidth,
-            getPosition().getY() - halfWidth);
+            getGlobalCenter().getX() - width,
+            getGlobalCenter().getY() - width);
         gas.setVelocity(vX, vY);
         gas.setAcceleration(0, 0);
         return gas;

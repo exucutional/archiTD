@@ -37,7 +37,7 @@ public class StructureListController {
                     Structure structure = iter.next();
                     Vector2D begin = structure.getGlobalCenter();
                     Vector2D end = placeStructure.getGlobalCenter();
-                    if (begin.sub(end).magnitude() < Settings.get().getPlaceRadius()) {
+                    if (begin.sub(end).magnitude() < Settings.get().getPlaceRadius() && structure.isEnemy() == placeStructure.isEnemy()) {
                         Connection connection = new Connection(structure.getGlobalCenter(), placeStructure.getGlobalCenter());
                         connection.setParent(mainController.mainPane);
                         structure.addConnection(connection);
@@ -61,9 +61,13 @@ public class StructureListController {
 
     @FXML public void hubButtonClicked(ActionEvent event) {
         Structure structure = new Structure(mainController.assetManager.getImage("structure-hub"), true);
+        structure.setActive(false);
         structure.setParent(mainController.mainPane);
         mainController.mainPane.getChildren().add(structure.getView());
         mainController.controlManager.placeStructure(structure);
+        mainController.objectManager.addStructure(structure);
+        structure.setDurability(Settings.get().getDefaultDurability() * 5);
+        placeEvent(structure);
     }
 
     @FXML public void turretButtonClicked(ActionEvent event) {
@@ -92,7 +96,7 @@ public class StructureListController {
 
     @FXML public void spreaderButtonClicked(ActionEvent event) {
         Structure structure = new Spreader(mainController.objectManager, 512);
-        structure.setImage(mainController.assetManager.getImage("structure-tower-simple"), true);
+        structure.setImage(mainController.assetManager.getImage("structure-spreader"), true);
         structure.setActive(false);
         structure.setParent(mainController.mainPane);
         mainController.mainPane.getChildren().add(structure.getView());
