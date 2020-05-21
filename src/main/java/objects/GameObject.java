@@ -34,6 +34,8 @@ abstract class GameObject extends SpriteObject {
         return isDeleted;
     }
 
+    public abstract Boolean isEnemy();
+
     public String getTag() {
         return tag;
     }

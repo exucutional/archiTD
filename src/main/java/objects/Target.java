@@ -6,5 +6,6 @@ public interface Target {
 
     public Vector2D getPosition();
     public Vector2D getGlobalCenter();
+    public Boolean isDeleted();
 
 }

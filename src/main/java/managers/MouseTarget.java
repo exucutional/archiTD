@@ -19,4 +19,8 @@ public class MouseTarget implements Target {
         return getPosition();
     }
 
+    public Boolean isDeleted() {
+        return false;
+    }
+
 }

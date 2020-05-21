@@ -1,8 +1,10 @@
 package objects;
 
-public class Gas extends Entity {
+import org.Settings;
 
-    private double damage = 0;
+public class Gas extends Entity implements DamageObject {
+
+    private double damage = Settings.get().getDefaultDamage();;
 
     public Gas() {
         ;
@@ -18,6 +20,14 @@ public class Gas extends Entity {
 
     public double getDamage() {
         return damage;
+    }
+
+    public Boolean isEnemy() {
+        return true;
+    }
+
+    public void delete() {
+        setLifespan(0);
     }
 
 }

@@ -39,6 +39,7 @@ public class Spreader extends Structure {
             Gas particle = createParticle();
             objectManager.addEntity(particle);
             objectManager.addGasEntity(particle);
+            objectManager.addDamageObject(particle);
             dtAcc -= period;
         }
     }
@@ -49,6 +50,23 @@ public class Spreader extends Structure {
             super.update(dt);
             spread(dt);
         }
+    }
+
+    @Override
+    public Boolean isEnemy() {
+        return true;
+    }
+    
+    @Override
+    public void delete() {
+        for (int i = 0; i < 500; i++) {
+            Gas particle = createParticle();
+            particle.getVelocity().mul(2);
+            objectManager.addEntity(particle);
+            objectManager.addGasEntity(particle);
+            objectManager.addDamageObject(particle);
+        }
+        super.delete();
     }
 
 }

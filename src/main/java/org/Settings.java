@@ -23,6 +23,8 @@ public class Settings {
     private DoubleProperty placeRadius = new SimpleDoubleProperty(300);
     private DoubleProperty shootRate = new SimpleDoubleProperty(0.5);
     private DoubleProperty targetRadius = new SimpleDoubleProperty(400);
+    private DoubleProperty defaultDurability = new SimpleDoubleProperty(50);
+    private DoubleProperty defaultDamage = new SimpleDoubleProperty(10);
 
     public final double getParticleWidth() {
         return particleWidth.get();
@@ -58,6 +60,14 @@ public class Settings {
 
     public final double getTargetRadius() {
         return targetRadius.get();
+    }
+
+    public final double getDefaultDurability() {
+        return defaultDurability.get();
+    }
+
+    public final double getDefaultDamage() {
+        return defaultDamage.get();
     }
 
 }

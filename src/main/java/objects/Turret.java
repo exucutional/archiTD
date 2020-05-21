@@ -75,6 +75,7 @@ public class Turret extends Defence {
             objectManager.addEntity(absorber);
             objectManager.addForceObject(absorber);
             objectManager.addEradicator(absorber);
+            objectManager.addDamageObject(absorber);
             acc = 0;
         }
     }

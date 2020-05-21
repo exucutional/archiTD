@@ -35,4 +35,9 @@ public class EventManager {
         listeners.remove(eventListener);
     }
 
+    public void unsubcribeAll(EventType eventType) {
+        List<EventListener> listeners = listenerMap.get(eventType);
+        listeners.clear();
+    }
+
 }

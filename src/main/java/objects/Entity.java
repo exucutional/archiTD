@@ -34,4 +34,8 @@ public class Entity extends GameObject implements Target {
         return maxLifespan;
     }
 
+    public Boolean isEnemy() {
+        return false;
+    }
+
 }

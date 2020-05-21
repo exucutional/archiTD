@@ -6,6 +6,7 @@ import java.util.Iterator;
 import org.Settings;
 
 import javafx.scene.canvas.GraphicsContext;
+import objects.DamageObject;
 import objects.Defence;
 import objects.Entity;
 import objects.Eradicator;
@@ -23,6 +24,7 @@ public class ObjectManager {
     private ArrayList<Eradicator> eradicators = new ArrayList<>();
     private ArrayList<Target> enemies = new ArrayList<>();
     private ArrayList<Defence> defences = new ArrayList<>();
+    private ArrayList<DamageObject> damageObjects = new ArrayList<>();
 
     private void removeDeletedObjects() {
         Iterator<Entity> iterEn = entities.iterator();
@@ -32,11 +34,26 @@ public class ObjectManager {
                 iterEn.remove();
             }
         }
+        Iterator<DamageObject> iterDobj = damageObjects.iterator();
+        while (iterDobj.hasNext()) {
+            DamageObject dObj = iterDobj.next();
+            if (dObj.isDeleted()) {
+                iterDobj.remove();
+            }
+        }
         Iterator<Gas> iterGas = gas.iterator();
         while (iterGas.hasNext()) {
             Gas gas = iterGas.next();
             if (gas.isDeleted()) {
                 iterGas.remove();
+            }
+        }
+        Iterator<Structure> iterStr = structures.iterator();
+        while (iterStr.hasNext()) {
+            Structure structure = iterStr.next();
+            if (structure.getDurability() <= 0) {
+                iterStr.remove();
+                structure.delete();
             }
         }
         Iterator<ForceObject> iterFobj = forceObjects.iterator();
@@ -53,6 +70,13 @@ public class ObjectManager {
                 iterErad.remove();
             }
         }
+        Iterator<Target> iterTarget = enemies.iterator();
+        while (iterTarget.hasNext()) {
+            Target target = iterTarget.next();
+            if (target.isDeleted()) {
+                iterTarget.remove();
+            }
+        }
     }
 
     public void update(double dt) {
@@ -63,9 +87,11 @@ public class ObjectManager {
         });
         eradicators.stream().parallel().forEach(eradicator -> {
             entities.stream().parallel().forEach(entity -> {
-                double decrement = eradicator.getDecrement(entity.getGlobalCenter());
-                entity.decreaseLifespan(5 * decrement);
-                eradicator.decreaseLifespan(4 * decrement);
+                if (eradicator.isEnemy() != entity.isEnemy()) {
+                    double decrement = eradicator.getDecrement(entity.getGlobalCenter());
+                    entity.decreaseLifespan(5 * decrement);
+                    eradicator.decreaseLifespan(3 * decrement);
+                }
             });
         });
         defences.stream().forEach(defence -> {
@@ -76,6 +102,16 @@ public class ObjectManager {
                 if (radius < minRadius) {
                     defence.setTarget(enemy);
                     minRadius = radius;
+                }
+            }
+        });
+        damageObjects.stream().forEach(dObj -> {
+            for (Structure structure : structures) {
+                if (dObj.isEnemy() != structure.isEnemy() && structure.isActive()) {
+                    if (dObj.getBoundary().intersects(structure.getBoundary())) {
+                        structure.setDurability(structure.getDurability() - dObj.getDamage());
+                        dObj.delete();
+                    }
                 }
             }
         });
@@ -115,6 +151,10 @@ public class ObjectManager {
 
     public void addGasEntity(Gas gas) {
         this.gas.add(gas);
+    }
+
+    public void addDamageObject(DamageObject dobj) {
+        this.damageObjects.add(dobj);
     }
 
     public Iterator<Gas> getGasIterator() {

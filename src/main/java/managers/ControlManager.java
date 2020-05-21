@@ -47,6 +47,7 @@ public class ControlManager {
                 controlMode = ControlMode.DEFAULT;
                 controlStructure.setActive(true);
                 eventManager.publish(EventType.PLACE);
+                eventManager.unsubcribeAll(EventType.PLACE);
             } else if (event.getButton().equals(MouseButton.PRIMARY)) {
                 eventManager.publish(EventType.SHOOT);
             }
