@@ -58,6 +58,11 @@ public class Spreader extends Structure {
     }
     
     @Override
+    public Boolean isActive() {
+        return true;
+    }
+
+    @Override
     public void delete() {
         for (int i = 0; i < 500; i++) {
             Gas particle = createParticle();

@@ -19,6 +19,7 @@ import managers.AssetManager;
 import managers.ControlManager;
 import managers.EventManager;
 import managers.ObjectManager;
+import objects.Connection;
 import objects.Gas;
 import objects.Spreader;
 import objects.Structure;
@@ -73,6 +74,8 @@ public class MainController {
                     structure.setPosition(position.getX() + x, position.getY() + y);
                 } else {
                     structure.setPosition(position);
+                    Connection connection = new Connection(structure.getPosition(), structure.getPosition());
+                    structure.addConnection(connection);
                 }
                 structureListController.connectStructure(structure);
             }
@@ -81,12 +84,14 @@ public class MainController {
 
     private void initHub() {
         Structure structure = new Structure(assetManager.getImage("structure-hub"), true);
-        structure.setActive(false);
+        structure.setActive(true);
         structure.setParent(mainPane);
         mainPane.getChildren().add(structure.getView());
         objectManager.addStructure(structure);
         structure.setDurability(Settings.get().getDefaultDurability() * 5);
         structure.setPosition(structure.getWidth() / 2 - 50, (Settings.get().getWindowHeight() - structure.getHeight()) / 2);
+        Connection connection = new Connection(structure.getPosition(), structure.getPosition());
+        structure.addConnection(connection);
     }
 
     public void init(ControlManager controlManager, AssetManager assetManager, ObjectManager objectManager, EventManager eventManager) {
